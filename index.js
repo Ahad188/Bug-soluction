@@ -12,6 +12,7 @@ let submitContainer = document.querySelector("#submitContainer");
 let quizContainer = document.querySelector("#quizContainer");
 let answersContainer = document.querySelector("#answersContainer");
 let displayResult = document.querySelector("#displayResult");
+let blog = document.querySelector("#blog");
 
 // EventListener for quiz start button
 startQuiz.addEventListener("click", () => {
@@ -85,6 +86,7 @@ document.getElementById("submit").addEventListener('click', () => {
   <p class="text-xs animate-pulse">Please Wait, We are checking...</p>
 </div>`;
   let timeTaken = document.querySelector("#count");
+  console.log(timeTaken)
   let totalMark = 0;
   let grade = {
     status: "",
@@ -178,3 +180,7 @@ document.getElementById("submit").addEventListener('click', () => {
   }, 1500);
   window.scrollTo(0, 0);
 });
+
+blog.addEventListener('click',()=>{
+     window.location.href = 'blog.html'
+})
