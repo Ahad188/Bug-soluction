@@ -47,7 +47,7 @@ startQuiz.addEventListener("click", () => {
 const loadQuiz = async () => {
   const res = await fetch("./data/quiz.json");
   const data = await res.json();
-//   quizData = data;
+  quizData = data;
 // console.log(data)
   displayQuiz(data);
 };
@@ -58,9 +58,7 @@ const displayQuiz = (data) => {
     quizContainer.innerHTML = "";
     return;
   }
-  
-  data.map((quiz, i) => {
-     console.log(quiz)
+  data.forEach((quiz, i) => {
     quizContainer.innerHTML += `<div class="m-3 py-3 px-4 shadow-sm rounded">
   <div class="flex items-center">
     <div class="h-8 w-8 bg-green-300 rounded-full flex justify-center items-center text-green-800 mr-3">
@@ -76,7 +74,8 @@ const displayQuiz = (data) => {
 };
 
 // EventListener for quiz submit button
-document.querySelector("#submit").addEventlistener("click", () => {
+document.getElementById("submit").addEventListener('click', () => {
+     console.log('this is click')
   if (answers.length < 6) {
     return;
   }
@@ -111,11 +110,7 @@ document.querySelector("#submit").addEventlistener("click", () => {
 
   // data setting on local storage and getting data from local storage
   let storage = JSON.parse(localStorage.getItem("result"));
-  if (storage) {
-    localStorage.setItem(
-      "results",
-      JSON.stringify([
-        ...storage,
+  if (storage) {localStorage.setItem("results",JSON.stringify([...storage,
         {
           marks: totalMark,
           examTime: timeTaken.innerText,
@@ -124,9 +119,7 @@ document.querySelector("#submit").addEventlistener("click", () => {
       ])
     );
   } else {
-    localStorage.setItem(
-      "results",
-      JSON.stringify([
+    localStorage.setItem("results",JSON.stringify([
         {
           marks: totalMark,
           examTime: timeTaken.innerText,
