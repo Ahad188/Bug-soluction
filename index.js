@@ -49,7 +49,7 @@ const loadQuiz = async () => {
   const res = await fetch("./data/quiz.json");
   const data = await res.json();
   quizData = data;
-
+// console.log(data)
   displayQuiz(data);
 };
 
@@ -86,6 +86,7 @@ document.getElementById("submit").addEventListener('click', () => {
   <p class="text-xs animate-pulse">Please Wait, We are checking...</p>
 </div>`;
   let timeTaken = document.querySelector("#count");
+   
   let totalMark = 0;
   let grade = {
     status: "",
@@ -111,23 +112,30 @@ document.getElementById("submit").addEventListener('click', () => {
 
   // data setting on local storage and getting data from local storage
   let storage = JSON.parse(localStorage.getItem("results"));
-  if (storage) {localStorage.setItem("results",JSON.stringify([...storage,
-        {
-          marks: totalMark,
-          examTime: timeTaken.innerText,
-          status: grade.status,
-        },
-      ])
-    );
-  } else {
-    localStorage.getItem("results",JSON.stringify([
-        {
-          marks: totalMark,
-          examTime: timeTaken.innerText,
-          status: grade.status,
-        },
-      ])
-    );
+    console.log(storage)
+    if (storage) {
+      localStorage.setItem(
+        "results",
+        JSON.stringify([
+          ...storage,
+          {
+            marks: totalMark,
+            examTime: timeTaken.innerText,
+            status: grade.status,
+          },
+        ])
+      );
+    } else {
+      localStorage.setItem(
+        "results",
+        JSON.stringify([
+          {
+            marks: totalMark,
+            examTime: timeTaken.innerText,
+            status: grade.status,
+          },
+        ])
+      );
   }
 
   // Right side bar/ answer section
